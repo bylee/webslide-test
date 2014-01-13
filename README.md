@@ -1,4 +1,4 @@
 webslide-test
-=============
+====================
 
-Webslide for Software Test
+Web Slide for software test

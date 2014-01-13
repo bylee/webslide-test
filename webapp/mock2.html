@@ -1,0 +1,31 @@
+<h2>Mockito & Powermock</h2>
+<pre><code class="java">
+@RunWith( PowerMockRunner.class )
+@PrepareForTest( { PreviewServer.class, PluginUtil.class } )
+public class
+PreviewServerTest
+{
+    @Test
+    public
+    void
+    test_down()
+    throws Exception
+    {
+        final IProject project = mock( IProject.class );
+        final PreviewServerManager manager = mock( PreviewServerManager.class );
+        final ResourceChangeAwareProviders providers = mock( ResourceChangeAwareProviders.class );
+        when( manager.getSynchronizationPolicy() ).thenReturn( SynchronizationPolicy.File );
+        whenNew( ResourceChangeAwareProviders.class ).withAnyArguments().thenReturn( providers );
+        
+        mockStatic( PluginUtil.class );
+        when( PluginUtil.loadClasses( "org.tizen.web.browser.preview" ) ).thenReturn( new Object[0] );
+        
+        final PreviewServer target = new PreviewServer( manager, project );
+        target.setIdleTime( 3000 );
+        verify( manager ).addPreviewServer( target );
+        trySleep( 4000 );
+        verify( manager ).removeServer( target );
+        
+    }
+}
+</code></pre>
