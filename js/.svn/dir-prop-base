@@ -1,0 +1,6 @@
+K 13
+svn:externals
+V 74
+baros.js http://bravo/svn/product/baros/baros.zone/src/webapp/js/baros.js
+
+END

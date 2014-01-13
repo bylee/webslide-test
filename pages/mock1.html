@@ -1,0 +1,33 @@
+<h2>Mockito & Powermock</h2>
+<pre><code class="java">
+@RunWith( PowerMockRunner.class )
+@PrepareForTest( FileUtil.class )
+public class
+FileUtilTest
+{
+    public void
+    test_isExist()
+    throws Exception
+    {
+        assertFalse( isExist( null ) );
+        assertFalse( isExist( "" ) );
+
+        final File textAbc = mock( File.class );
+        when( textAbc.exists() ).thenReturn( Boolean.FALSE );
+        final File resource = mock( File.class );
+        when( resource.exists() ).thenReturn( Boolean.TRUE );
+        final File textTxt = mock( File.class );
+        when( textTxt.exists() ).thenReturn( Boolean.TRUE );
+        
+        whenNew( File.class ).withArguments( "test/test_files/resource/text.abc" ).thenReturn( textAbc );
+        whenNew( File.class ).withArguments( "test/test_files/resource" ).thenReturn( resource );
+        whenNew( File.class ).withArguments( "test/test_files/resource/" ).thenReturn( resource );
+        whenNew( File.class ).withArguments( "test/test_files/resource/text.txt" ).thenReturn( textTxt );
+        
+        assertFalse( FileUtil.isExist( "test/test_files/resource/text.abc" ) );
+        assertTrue( FileUtil.isExist( "test/test_files/resource" ) );
+        assertTrue( FileUtil.isExist( "test/test_files/resource/" ) );
+        assertTrue( FileUtil.isExist( "test/test_files/resource/text.txt" ) );
+    }
+}
+</code></pre>

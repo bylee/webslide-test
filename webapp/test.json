@@ -1,4 +1,0 @@
-{
-  "id" : "test",
-  "pages" : [ "cover", "agenda", "overview", "overview2", "whitebox-blackbox", "out-of-container", "mockup", "junit", "junit2", "mockito-powermock", "mock1", "mock2", "mock3", "emma", "ant", "jenkins", "infinitest", "thank" ]
-}
